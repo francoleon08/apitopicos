@@ -9,13 +9,11 @@ import com.francoleon.apitopicos.util.ConvertTopicoToTopicoDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ControllerTopico {
@@ -46,5 +44,18 @@ public class ControllerTopico {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(list);
+    }
+
+    /**
+     * Endpoint para buscar un Topico mediante si long id
+     * @param id del Topico
+     * @return ResponseEntity que contiene los detalles del Topico buscado
+     */
+    @GetMapping("/topico/{id}")
+    public ResponseEntity<TopicoDTO> findTopicoById_id(@PathVariable long id) {
+        Optional<Topico> topico = serviceTopico.findTopicoById_id(id);
+        return topico.map(
+                value -> ResponseEntity.ok(ConvertTopicoToTopicoDTO.convertTopicoToDTO(value))).orElseGet(()
+                -> ResponseEntity.noContent().build());
     }
 }

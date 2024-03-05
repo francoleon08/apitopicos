@@ -5,6 +5,7 @@ import com.francoleon.apitopicos.persistence.dto.TopicoDTO;
 import com.francoleon.apitopicos.persistence.entity.Topico;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ServiceTopico {
 
@@ -13,6 +14,13 @@ public interface ServiceTopico {
      * @return List<TopicoDTO> lista de topicos
      */
     public List<TopicoDTO> getTopicos();
+
+    /**
+     * Recupera un topico por su long id
+     * @param id del topico
+     * @return Topico
+     */
+    public Optional<Topico> findTopicoById_id(long id);
 
     /**
      * Registra un Topico
