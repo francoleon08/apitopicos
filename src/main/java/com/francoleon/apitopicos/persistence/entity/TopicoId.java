@@ -17,7 +17,15 @@ import java.io.Serializable;
 @Embeddable
 public class TopicoId implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "topico_seq"
+    )
+    @SequenceGenerator(
+            name = "topico_seq",
+            sequenceName = "topico_sequence",
+            allocationSize = 1
+    )
     private Long id;
     @Column(name = "id_titulo")
     private String titulo;

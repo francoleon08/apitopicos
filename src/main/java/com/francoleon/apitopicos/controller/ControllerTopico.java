@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 @RestController
 public class ControllerTopico {
 
@@ -25,7 +27,7 @@ public class ControllerTopico {
                 .build();
         Topico topico_save = Topico.builder()
                 .id(topico_id)
-                .fecha_crecion(topico.getFecha_crecion())
+                .fecha_crecion(new Date())
                 .estatus(topico.getEstatus())
                 .autor(topico.getAutor())
                 .curso(topico.getCurso())

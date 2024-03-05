@@ -18,7 +18,6 @@ public class TopicoDTO {
     private String titulo;
     @NotBlank (message = "Ingrese un mensaje.")
     private String mensaje;
-    private Date fecha_crecion;
     private String estatus;
     private String autor;
     private String curso;
