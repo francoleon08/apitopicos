@@ -21,4 +21,5 @@ public class TopicoDTO {
     private String estatus;
     private String autor;
     private String curso;
+    private Date fecha_crecion;
 }
