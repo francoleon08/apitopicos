@@ -58,4 +58,54 @@ public class ControllerTopico {
                 value -> ResponseEntity.ok(ConvertTopicoToTopicoDTO.convertTopicoToDTO(value))).orElseGet(()
                 -> ResponseEntity.noContent().build());
     }
+
+
+    /**
+     * Enpoint para actualizar un Topico registrado.
+     * Campos obligatorios : {autor, curso, titulo, mensaje}
+     * @param id del Topico a actualizar
+     * @param topicoDTO
+     * @return
+     * @throws DuplicateKeyException exception de clave duplicada
+     */
+    @PutMapping("/topico/{id}")
+    public ResponseEntity<Topico> updateTopico(
+            @PathVariable long id,
+            @Valid @RequestBody TopicoDTO topicoDTO) throws DuplicateKeyException {
+        Optional<Topico> topico = serviceTopico.findTopicoById_id(id);
+        Topico update;
+        TopicoId updateId;
+
+        if(topico.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        // Actualizo el ID
+        updateId = TopicoId.builder()
+                .id(topico.get().getId().getId())
+                .mensaje(topicoDTO.getMensaje())
+                .titulo(topicoDTO.getTitulo())
+                .build();
+
+        // Actualizo el Topico
+        update = Topico.builder()
+                .id(updateId)
+                .autor(topicoDTO.getAutor())
+                .curso(topicoDTO.getCurso())
+                .estatus(topico.get().getEstatus())
+                .fecha_crecion(topico.get().getFecha_crecion())
+                .build();
+
+        return ResponseEntity.ok(serviceTopico.saveTopico(update));
+    }
+
+
+    /**
+     * Endpoint para eliminar un registro mediante su id
+     * @param id
+     */
+    @DeleteMapping("/topico/{id}")
+    public void deleteTopicoById(@PathVariable long id) {
+        serviceTopico.deleteTopicoById_id(id);
+    }
 }

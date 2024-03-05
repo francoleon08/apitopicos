@@ -16,4 +16,6 @@ public interface TopicoRepository extends JpaRepository<Topico, TopicoId> {
      * @return Topico
      */
     public Optional<Topico> findTopicoById_Id(Long id_id);
+
+    public void deleteTopicoById_Id(long id_id);
 }

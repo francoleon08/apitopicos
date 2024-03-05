@@ -29,4 +29,10 @@ public interface ServiceTopico {
      * @throws DuplicateKeyException exception de clave ya existente.
      */
     public Topico saveTopico(Topico topico) throws DuplicateKeyException;
+
+    /**
+     * Elimina un registro de la base de datos mediante su id
+     * @param id del topico
+     */
+    public void deleteTopicoById_id(long id);
 }
