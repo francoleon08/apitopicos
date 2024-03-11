@@ -48,3 +48,4 @@ Antes de comenzar, asegúrate de tener instalado en tu sistema:
 4. Accede a la aplicación desde tu navegador web:
 - Aplicación: http://localhost:8080
 - PhpMyAdmin: http://localhost:8000
+  - Usuario: root (sin contraseña)
