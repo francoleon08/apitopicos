@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    image: pee-app:1.0.0
+    build: .
+    ports:
+      - '8080:8080'
+    environment:
+      - DB_URL=jdbc:mysql://db:3306/database_topicos?autoReconnect=true&useSSL=false
+      - DB_USER=root
+      - DB_PASS=
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=database_topicos
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3307:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8000:80'
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
